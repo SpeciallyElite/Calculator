@@ -54,5 +54,3 @@ while (true) {
     
     input2 = parseInt(prompt("Enter"));
 }
-
-
