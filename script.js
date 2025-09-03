@@ -22,6 +22,15 @@ const sub = document.querySelector(".subtraction");
 const multiply = document.querySelector(".multiplication");
 const divide = document.querySelector(".division");
 const equal = document.querySelector(".equals");
+const decimal = document.getElementById("decimal");
+
+decimal.addEventListener("click", () => {
+    if (!currentInput.includes(".")) {
+        if (currentInput === "") currentInput = "0";
+        currentInput += ".";
+        display.value += ".";
+    }
+});
 
 allClear.addEventListener("click", () => {
     display.value = "";
