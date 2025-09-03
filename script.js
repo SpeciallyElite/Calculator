@@ -1,56 +1,172 @@
-let a = 0;
-let b = 0;
-let operator = "";
+const display = document.getElementById("display");
 
-let input1 = parseInt(prompt("Enter"));
-a = input1;
+const num0 = document.getElementById("num0");
+const num1 = document.getElementById("num1");
+const num2 = document.getElementById("num2");
+const num3 = document.getElementById("num3");
+const num4 = document.getElementById("num4");
+const num5 = document.getElementById("num5");
+const num6 = document.getElementById("num6");
+const num7 = document.getElementById("num7");
+const num8 = document.getElementById("num8");
+const num9 = document.getElementById("num9");
 
-let input2 = parseInt(prompt("Enter"));
-b = input2;
+let currentInput = "";
+let firstNumber = null;
+let operator = null;
+let result = null;
 
-let input3 = prompt("Enter");
-operator = input3;
+const allClear = document.querySelector(".allclear");
+const add = document.querySelector(".addition");
+const sub = document.querySelector(".subtraction");
+const multiply = document.querySelector(".multiplication");
+const divide = document.querySelector(".division");
+const equal = document.querySelector(".equals");
 
-let result = 0;
+allClear.addEventListener("click", () => {
+    display.value = "";
+    currentInput = "";
+    firstNumber = null;
+    operator = null;
+})
 
-while (true) {
-    
-    let input4 = prompt("Enter");
-    finalizer = input4;
-
-
-    if (operator === "+") {
-        result = a + b;
-        console.log(result)
+add.addEventListener("click", () => {
+    if (firstNumber === null) {
+        firstNumber = currentInput;
+    } else if (currentInput !== "") {
+        switch (operator) {
+            case "+":
+                firstNumber = (parseFloat(firstNumber) + parseFloat(currentInput)).toString();
+                break;
+            case "-":
+                firstNumber = (parseFloat(firstNumber) - parseFloat(currentInput)).toString();
+                break;
+            case "*":
+                firstNumber = (parseFloat(firstNumber) * parseFloat(currentInput)).toString();
+                break;
+            case "/":
+                firstNumber = (parseFloat(firstNumber) / parseFloat(currentInput)).toString();
+                break;
+        }
     }
 
-    else if (operator === "-") {
-        result = a - b;
-        console.log(result)
+    operator = "+";
+    display.value = firstNumber + add.textContent;
+    currentInput = "";
+});
+
+sub.addEventListener("click", () => {
+    if (firstNumber === null) {
+        firstNumber = currentInput;
+    } else if (currentInput !== "") {
+        switch (operator) {
+            case "+":
+                firstNumber = (parseFloat(firstNumber) + parseFloat(currentInput)).toString();
+                break;
+            case "-":
+                firstNumber = (parseFloat(firstNumber) - parseFloat(currentInput)).toString();
+                break;
+            case "*":
+                firstNumber = (parseFloat(firstNumber) * parseFloat(currentInput)).toString();
+                break;
+            case "/":
+                firstNumber = (parseFloat(firstNumber) / parseFloat(currentInput)).toString();
+                break;
+        }
     }
 
-    else if (operator === "*" || operator === "x" || operator === "X") {
-        result = a * b;
-        console.log(result)
+    operator = "-";
+    display.value = firstNumber + sub.textContent;
+    currentInput = "";
+});
+
+multiply.addEventListener("click", () => {
+    if (firstNumber === null) {
+        firstNumber = currentInput;
+    } else if (currentInput !== "") {
+        switch (operator) {
+            case "+":
+                firstNumber = (parseFloat(firstNumber) + parseFloat(currentInput)).toString();
+                break;
+            case "-":
+                firstNumber = (parseFloat(firstNumber) - parseFloat(currentInput)).toString();
+                break;
+            case "*":
+                firstNumber = (parseFloat(firstNumber) * parseFloat(currentInput)).toString();
+                break;
+            case "/":
+                firstNumber = (parseFloat(firstNumber) / parseFloat(currentInput)).toString();
+                break;
+        }
     }
 
-    else if (operator === "/") {
-        result = a / b;
-        console.log(result)
+    operator = "*";
+    display.value = firstNumber + multiply.textContent;
+    currentInput = "";
+});
+
+divide.addEventListener("click", () => {
+    if (firstNumber === null) {
+        firstNumber = currentInput;
+    } else if (currentInput !== "") {
+        switch (operator) {
+            case "+":
+                firstNumber = (parseFloat(firstNumber) + parseFloat(currentInput)).toString();
+                break;
+            case "-":
+                firstNumber = (parseFloat(firstNumber) - parseFloat(currentInput)).toString();
+                break;
+            case "*":
+                firstNumber = (parseFloat(firstNumber) * parseFloat(currentInput)).toString();
+                break;
+            case "/":
+                firstNumber = (parseFloat(firstNumber) / parseFloat(currentInput)).toString();
+                break;
+        }
     }
 
-    else {
-        alert("Enter a valid operator/symbol");
-        break;
-    }
+    operator = "/";
+    display.value = firstNumber + divide.textContent;
+    currentInput = "";
+});
 
-    if (finalizer === "="){
-        console.log(result)
-        break;
-    }
 
-    a=result;
-    operator=finalizer;
-    
-    input2 = parseInt(prompt("Enter"));
-}
+equal.addEventListener("click", () => {
+    if (firstNumber !== null && currentInput !== "") {
+        switch (operator) {
+            case "+":
+                result = parseFloat(firstNumber) + parseFloat(currentInput);
+                break;
+            case "-":
+                result = parseFloat(firstNumber) - parseFloat(currentInput);
+                break;
+            case "*":
+                result = parseFloat(firstNumber) * parseFloat(currentInput);
+                break;
+            case "/":
+                result = parseFloat(firstNumber) / parseFloat(currentInput);
+                break;
+        }
+
+        display.value = result;
+        firstNumber = result;
+        currentInput = "";
+        operator = null;
+    }
+});
+
+const numbers = [num0, num1, num2, num3, num4, num5, num6, num7, num8, num9];
+
+numbers.forEach((numBtn, index) => {
+    numBtn.addEventListener("click", () => {
+        if (index === 0 && currentInput === "0") return;
+
+        if (currentInput === "0") {
+            currentInput = index.toString();
+            display.value = display.value.slice(0, -1) + currentInput;
+        } else {
+            currentInput += index.toString();
+            display.value += index.toString();
+        }
+    });
+});
